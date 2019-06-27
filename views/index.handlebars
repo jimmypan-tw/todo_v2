@@ -1,0 +1,15 @@
+<!-- ./views/index.handlebars -->
+<a href="/todos/new">Create</a>
+<ul>
+    {{#each todos}}
+    <li>
+        <input type="checkbox" name="done" {{#if this.done}} checked {{/if }} disabled>
+        {{this.name}}
+        <a href="/todos/{{this.id}}">detail</a>
+        <a href="/todos/{{this.id}}/edit">edit</a>
+        <form action="/todos/{{this.id}}/delete?_method=DELETE" method="POST" style="display: inline">
+            <button type="submit">delete</button>
+        </form>
+    </li>
+    {{/each }}
+</ul>

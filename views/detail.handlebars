@@ -1,0 +1,10 @@
+<!-- ./views/detail.handlebars -->
+<p>
+    <input type="checkbox" name="done" {{#if todo.done}} checked {{/if }} disabled>
+    {{todo.name}}
+</p>
+<a href="/">back</a>
+<a href="/todos/{{todo.id}}/edit">edit</a>
+<form action="/todos/{{todo.id}}/delete?_method=DELETE" method="POST" style="display: inline">
+    <button type="submit">delete</button>
+</form>
