@@ -27,7 +27,7 @@ app.use(methodOverride('_method'))
 
 // 引用並設定mongoose
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1/todo', { useNewUrlParser: true })
+mongoose.connect('mongodb://127.0.0.1/todo', { useNewUrlParser: true, useCreateIndex: true })
 const db = mongoose.connection
 db.on('error', () => {
     console.log('mongodb error!')
@@ -42,7 +42,9 @@ const Todo = require('./models/todo')
 
 // 使用 express session 
 app.use(session({
-    secret: '123abc' // your secret key
+    secret: '123abc', // your secret key
+    resave: 'false',
+    saveUninitialized: 'false'
 }))
 
 // 使用 passport
