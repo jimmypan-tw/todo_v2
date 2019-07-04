@@ -1,5 +1,11 @@
 const express = require('express')
 const app = express()
+
+// 判別開發環境
+if (process.env.NODE_ENV !== 'production') {   // 如果不是 production 模式
+    require('dotenv').config()                  // 使用 dotenv 讀取 .env 檔案
+}
+
 const port = 3003
 // 引用body-parser
 const bodyParser = require('body-parser')
@@ -70,8 +76,7 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/home'))
 app.use('/todos', require('./routes/todo'))
 app.use('/users', require('./routes/user'))
-
-
+app.use('/auth', require('./routes/auths'))    // 把 auth route 加進來
 
 app.listen(port, () => {
     console.log('App is running...')
