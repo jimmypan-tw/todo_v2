@@ -33,7 +33,10 @@ app.use(methodOverride('_method'))
 
 // 引用並設定mongoose
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1/todo', { useNewUrlParser: true, useCreateIndex: true })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/todo', { 
+    useNewUrlParser: true, 
+    useCreateIndex: true 
+})
 const db = mongoose.connection
 db.on('error', () => {
     console.log('mongodb error!')
@@ -88,6 +91,6 @@ app.use('/todos', require('./routes/todo'))
 app.use('/users', require('./routes/user'))
 app.use('/auth', require('./routes/auths'))    // 把 auth route 加進來
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
     console.log('App is running...')
 })
